@@ -1,5 +1,5 @@
 // @flow
-import React, {useState, useEffect} from 'react';
+import * as React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {
   ApplicationProvider,
@@ -18,7 +18,7 @@ import * as eva from '@eva-design/eva';
  */
 const HeartIcon = (props) => <Icon {...props} name="heart" />;
 
-export default function App() {
+export default function App(): React.Node {
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
