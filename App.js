@@ -1,16 +1,20 @@
 // @flow
-import * as React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import type {Node} from 'react';
+import {StyleSheet, View, Image} from 'react-native';
 import {
-  ApplicationProvider,
-  Button,
-  Icon,
-  IconRegistry,
-  Layout,
-  Text,
+    ApplicationProvider,
+    Button,
+    Icon,
+    IconRegistry,
+    Layout,
+    Text,
+    Divider,
 } from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
+
+import LoginApp from './components/LoginApp';
 
 /**
  * Use any valid `name` property from eva icons (e.g `github`, or `heart-outline`)
@@ -18,39 +22,57 @@ import * as eva from '@eva-design/eva';
  */
 const HeartIcon = (props) => <Icon {...props} name="heart" />;
 
-export default function App(): React.Node {
-  return (
-    <>
-      <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider {...eva} theme={eva.dark}>
-        <Layout style={styles.container}>
-          <Text style={styles.text} category="h1">
-            Welcome to UI Kitten 😻
-          </Text>
-          <Text style={styles.text} category="s1">
-            Start with editing App.js to configure your App
-          </Text>
-          <Text style={styles.text} appearance="hint">
-            For example, try changing theme to Dark by using eva.dark
-          </Text>
-          <Button style={styles.likeButton} accessoryLeft={HeartIcon}>
-            LIKE
-          </Button>
-        </Layout>
-      </ApplicationProvider>
-    </>
-  );
+export default function App(): Node {
+    return (
+        <>
+            <IconRegistry icons={EvaIconsPack} />
+            <ApplicationProvider {...eva} theme={eva.dark}>
+                <Layout style={styles.container}>
+                    <View style={styles.innerContainer}>
+                        <Text style={styles.text} category="h2">
+                            😻
+                        </Text>
+                        <Text style={styles.text} category="h2">
+                            Welcome to
+                        </Text>
+                        <Image
+                            source={require('./assets/logo.png')}
+                            style={styles.logo}
+                        />
+                        <Divider />
+                        <Button
+                            style={styles.likeButton}
+                            accessoryLeft={HeartIcon}>
+                            LIKE
+                        </Button>
+                        <Divider />
+                        <LoginApp />
+                    </View>
+                </Layout>
+            </ApplicationProvider>
+        </>
+    );
 }
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    textAlign: 'center',
-  },
-  likeButton: {
-    marginVertical: 16,
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 15,
+    },
+    text: {
+        textAlign: 'center',
+    },
+    likeButton: {
+        marginVertical: 16,
+    },
+    innerContainer: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    logo: {
+        height: 200,
+        width: 200,
+    },
 });
